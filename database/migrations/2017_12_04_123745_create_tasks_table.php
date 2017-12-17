@@ -22,7 +22,7 @@ class CreateTasksTable extends Migration
             $table->dateTime('date');
             $table->dateTime('notify_date');
             $table->boolean('periodical');
-            $table->dateTime('period')->nullable();
+            $table->integer('period')->nullable();
             $table->timestamps();
         });
     }

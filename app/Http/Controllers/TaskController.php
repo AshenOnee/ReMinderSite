@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Task;
 use App\Topic;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
@@ -62,6 +63,8 @@ class TaskController extends Controller
 
         $validator = Validator::make(Input::all(), $rules);
 
+
+
         // process the login
         if ($validator->fails()) {
             return Redirect::to('tasks/create')
@@ -69,6 +72,13 @@ class TaskController extends Controller
                 ->withInput(Input::all());
         }
 
+        $date = new DateTime(Input::get('date'));
+        $dtNow = new DateTime();
+        if($date < $dtNow){
+            return Redirect::to('tasks/create')
+                ->withErrors(['Нельзя добавить задачу с заданным временем и датой.'])
+                ->withInput(Input::all());
+        }
 
         $user = Auth::user();
         $task = new Task;
@@ -77,6 +87,17 @@ class TaskController extends Controller
         $task->user_id = $user->id;
         $task->topic_id = Input::get('topic');
         $task->date = Input::get('date');
+        $task->notify_date = Input::get('date');
+
+        $periodical = Input::get('periodical');
+        $task->periodical = ($periodical === 'true');
+
+        if($periodical) {
+            $quant = Input::get('quant');
+            $minuts = Input::get('minuts');
+            $task->period = $quant*$minuts;
+//            $dtTask->add(new \DateInterval('PT' . $quant * $minuts .'M'));
+        }
         $task->save();
 
         Session::flash('message', 'Задача успешно созданна!');
