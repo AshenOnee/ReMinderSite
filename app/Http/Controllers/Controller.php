@@ -15,14 +15,13 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function query(){
-
         $user = Auth::user();;
-        $task = Task::query()->where('user_id', $user->id)->orderBy('date')->first();
+        $task = Task::query()->where('user_id', $user->id)->orderByDesc('notify_date')->first();
         if($task != null){
             $dtNow = new DateTime();
             $dtTask = new DateTime($task->date);
 
-            if($dtNow > $dtTask)
+            if($dtNow < $dtTask)
                 return json_encode($task);
             else return null;
         }

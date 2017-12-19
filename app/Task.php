@@ -7,7 +7,7 @@ use App\Topic;
 
 class Task extends Model
 {
-    protected $fillable = ['title', 'description', 'date', 'notify_date', 'periodical', 'period'];
+    protected $fillable = ['title', 'description', 'date', 'notify_date', 'periodical', 'quant', 'minuts'];
     protected $primaryKey = 'id';
 
     public function users() {

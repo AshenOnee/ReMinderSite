@@ -30,6 +30,8 @@ Route::group(['middleware' => 'auth'], function()
     Route::resource('topics', 'TopicController');
 
     Route::resource('tasks', 'TaskController');
+
+
 });
 
 

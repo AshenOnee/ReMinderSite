@@ -82,13 +82,16 @@
             {{--</div>--}}
 
             <div class="links">
-                <a href="/tasks/">Мои задачи</a>
-                <a href="/topics/">Мои категории</a>
+                {{--<a href="/tasks/">Мои задачи</a>--}}
+                {{--<a href="/topics/">Мои категории</a>--}}
 
                 {{--<a href="https://laracasts.com">Laracasts</a>--}}
                 {{--<a href="https://laravel-news.com">News</a>--}}
                 {{--<a href="https://forge.laravel.com">Forge</a>--}}
                 {{--<a href="https://github.com/laravel/laravel">GitHub</a>--}}
+            </div>
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/Qhh0igzqtqY?rel=0" allowfullscreen></iframe>
             </div>
         </div>
     </div>

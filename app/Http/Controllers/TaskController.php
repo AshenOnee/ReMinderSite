@@ -56,16 +56,9 @@ class TaskController extends Controller
             'date' => 'required|date'
         );
 
-//        $messages = [
-//            'required' => 'Поле :attribute обязательно для заполнения.',
-//            'max' => 'Поле :attribute не должно содержать более :max символов.'
-//        ];
-
         $validator = Validator::make(Input::all(), $rules);
 
 
-
-        // process the login
         if ($validator->fails()) {
             return Redirect::to('tasks/create')
                 ->withErrors($validator)
@@ -90,13 +83,11 @@ class TaskController extends Controller
         $task->notify_date = Input::get('date');
 
         $periodical = Input::get('periodical');
-        $task->periodical = ($periodical === 'true');
+        $task->periodical = ($periodical === 'on');
 
         if($periodical) {
-            $quant = Input::get('quant');
-            $minuts = Input::get('minuts');
-            $task->period = $quant*$minuts;
-//            $dtTask->add(new \DateInterval('PT' . $quant * $minuts .'M'));
+            $task->quant = Input::get('quant');
+            $task->minuts = Input::get('minuts');
         }
         $task->save();
 

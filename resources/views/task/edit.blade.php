@@ -33,7 +33,6 @@
                             {{ Form::text('description', Input::old('description'), array('class' => 'form-control')) }}
                         </div>
 
-
                         <div class="form-group">
                             {{ Form::label('datetime', 'Время и дата') }}
                             <div class='input-group date' id='datetimepicker2'>
@@ -46,7 +45,26 @@
 
                         <div class="form-group">
                             {{ Form::label('periodical', 'Задача регулярная') }}
-                            {{ Form::text('periodical', $task->periodical, array('class' => 'form-control')) }}
+                            {{ Form::checkbox('periodical', null, $task->periodical, array('class' => 'form-check-input', 'id' => 'periodical')) }}
+                        </div>
+
+                        <div class="form-group" id="period">
+                            {{ Form::label('period', 'Повторять каждые') }}
+
+                            <div class="input-group">
+                                  <span class="input-group-btn">
+                                      <button type="button" class="btn btn-danger btn-number"  data-type="minus" data-field="quant">
+                                        <span class="glyphicon glyphicon-minus"></span>
+                                      </button>
+                                  </span>
+                                {{Form::text('quant', $task->quant, array('class' => 'form-control input-number', 'value' => '1', 'min' => '1', 'max' => '100'))}}
+                                <span class="input-group-btn">
+                                      <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant">
+                                          <span class="glyphicon glyphicon-plus"></span>
+                                      </button>
+                                    </span>
+                                {{Form::select('minuts', array('1' => 'Минуты', '60' => 'Часа', '1440' => 'Дня', '10080' => 'Недели'), $task->minuts, array('class' => 'form-control'))}}
+                            </div>
                         </div>
 
                         {!! Form::submit('Добавить', array('class' => 'btn btn-primary')) !!}

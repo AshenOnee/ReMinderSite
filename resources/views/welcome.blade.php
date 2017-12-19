@@ -89,7 +89,7 @@
                 <div class="links">
                     {{--<a href="https://laravel.com/docs">Documentation</a>--}}
                     <a href="https://github.com/AshenOnee/ReMinderSite">GitHub Site</a>
-                    <a href="https://github.com/AshenOnee/ReMinder">GitHub Extension</a>
+                    <a href="https://github.com/latalyananders/ReMinder">GitHub Extension</a>
 
                     {{--<a href="https://laracasts.com">Laracasts</a>--}}
                     {{--<a href="https://laravel-news.com">News</a>--}}
