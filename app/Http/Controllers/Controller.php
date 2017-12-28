@@ -9,19 +9,19 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
-
+use App\User;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function query(){
-        $user = Auth::user();;
-        $task = Task::query()->where('user_id', $user->id)->orderByDesc('notify_date')->first();
+        $user = request()->user();
+        //$task = Task::query()->where('user_id', $user->id)->orderBy('notify_date')->first();
+        $task = Task::with(['topic'])->where('user_id', $user->id)->orderBy('notify_date')->first();
         if($task != null){
             $dtNow = new DateTime();
-            $dtTask = new DateTime($task->date);
 
-            if($dtNow < $dtTask)
+            if((($dtNow->getTimestamp())*1000) > (float)($task->notify_date))
                 return json_encode($task);
             else return null;
         }
@@ -29,6 +29,6 @@ class Controller extends BaseController
     }
 
     public function checkAuth(){
-        return json_encode(Auth::check());
+        return response()->json(request()->user());
     }
 }

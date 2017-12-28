@@ -22,6 +22,7 @@
                             {!! Form::text('name', null, array('class' => 'form-control')) !!}
                         </div>
 
+
                         {!! Form::submit('Сохранить', array('class' => 'btn btn-primary')) !!}
 
                         {!! Form::close() !!}

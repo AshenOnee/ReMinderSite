@@ -5,7 +5,7 @@
         html, body {
             background-color: #fff;
             color: #636b6f;
-            font-family: 'Raleway', sans-serif;
+            font-family: 'Pacifico', sans-serif;
             font-weight: 100;
             height: 100vh;
             margin: 0;
@@ -91,7 +91,8 @@
                 {{--<a href="https://github.com/laravel/laravel">GitHub</a>--}}
             </div>
             <div class="embed-responsive embed-responsive-16by9">
-                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/Qhh0igzqtqY?rel=0" allowfullscreen></iframe>
+                <img src="https://memegenerator.net/img/instances/500x/12552244/-.jpg">
+                {{--<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/Qhh0igzqtqY?rel=0" allowfullscreen></iframe>--}}
             </div>
         </div>
     </div>

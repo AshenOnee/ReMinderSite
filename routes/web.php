@@ -25,8 +25,6 @@ Route::get('/checkauth', 'Controller@checkAuth');
 
 Route::group(['middleware' => 'auth'], function()
 {
-    Route::get('/query', 'Controller@query');
-
     Route::resource('topics', 'TopicController');
 
     Route::resource('tasks', 'TaskController');

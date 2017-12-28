@@ -15,10 +15,9 @@
                     <div class="panel-heading">Новая задача</div>
 
                     <div class="panel-body">
-
                         {!! Html::ul($errors->all()) !!}
 
-                        {!! Form::open(array('url' => 'tasks')) !!}
+                        {!! Form::open(array('url' => 'tasks', 'id' => 'form')) !!}
 
                         <div class="form-group">
                             {{ Form::label('topic', 'Категория') }}
@@ -70,8 +69,11 @@
                                     {{Form::select('minuts', array('1' => 'Минуты', '60' => 'Часа', '1440' => 'Дня', '10080' => 'Недели'), null, array('class' => 'form-control'))}}
                             </div>
                         </div>
+                        <input name="datetime" id="datetime" hidden>
 
-                        {!! Form::submit('Добавить', array('class' => 'btn btn-primary')) !!}
+                        <span id="span" class="btn btn-primary">Добавить</span>
+
+                        {{--{!! Form::submit('Добавить', array('class' => 'btn btn-primary')) !!}--}}
 
                         {!! Form::close() !!}
 
@@ -99,5 +101,10 @@
 @endsection
 
 @section('myscript')
+    <script type="text/javascript">
+        window.topics=<?=json_encode($topics);?>;
+    </script>
+    <script type="text/javascript" src={{ URL::asset('js/task/numericupdown.js') }}></script>
+    <script type="text/javascript" src={{ URL::asset('js/task/script.js') }}></script>
     <script type="text/javascript" src={{ URL::asset('js/scripts.js') }}></script>
 @endsection

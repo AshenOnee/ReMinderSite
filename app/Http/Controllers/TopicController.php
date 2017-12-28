@@ -21,7 +21,7 @@ class TopicController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $topics = Topic::all()->where('user_id', $user->id);
+        $topics = Topic::all()->where('user_id', $user->id)->where('name','!=','Общее');
         return View::make('topic.index')->with('topics', $topics);
     }
 

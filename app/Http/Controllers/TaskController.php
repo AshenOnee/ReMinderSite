@@ -23,7 +23,8 @@ class TaskController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $tasks = Task::all()->where('user_id', $user->id);
+//        $tasks = Task::all()->where('user_id', $user->id);
+        $tasks = Task::with(['topic'])->where('user_id', $user->id)->orderBy('date')->get();
         return View::make('task.index')
             ->with('tasks', $tasks);
     }
@@ -37,7 +38,6 @@ class TaskController extends Controller
     {
         $user = Auth::user();
         $topics = Topic::all()->where('user_id', $user->id)->pluck('name', 'id')->all();
-//        $topics = Topic::lists('name', 'id')->where('user_id', $user->id);
 
         return View::make('task.create', compact('topics'));
     }
@@ -53,7 +53,8 @@ class TaskController extends Controller
         $rules = array(
             'title' => 'required|max:100',
             'description' => 'max:255',
-            'date' => 'required|date'
+            'date' => 'required|date',
+            'datetime' => 'numeric'
         );
 
         $validator = Validator::make(Input::all(), $rules);
@@ -65,22 +66,21 @@ class TaskController extends Controller
                 ->withInput(Input::all());
         }
 
-        $date = new DateTime(Input::get('date'));
+        $date = Input::get('datetime');
         $dtNow = new DateTime();
-        if($date < $dtNow){
-            return Redirect::to('tasks/create')
-                ->withErrors(['Нельзя добавить задачу с заданным временем и датой.'])
-                ->withInput(Input::all());
-        }
-
+//        if($date < $dtNow->getTimestamp()*1000){
+//            return Redirect::to('tasks/create')
+//                ->withErrors(['Нельзя добавить задачу на время и дату менее текущего.'])
+//                ->withInput(Input::all());
+//        }
         $user = Auth::user();
         $task = new Task;
         $task->title = Input::get('title');
         $task->description = Input::get('description');
         $task->user_id = $user->id;
         $task->topic_id = Input::get('topic');
-        $task->date = Input::get('date');
-        $task->notify_date = Input::get('date');
+        $task->date = Input::get('datetime');
+        $task->notify_date = Input::get('datetime');
 
         $periodical = Input::get('periodical');
         $task->periodical = ($periodical === 'on');
@@ -134,7 +134,20 @@ class TaskController extends Controller
         $task->title = Input::get('title');
         $task->description = Input::get('description');
         $task->topic_id = Input::get('topic');
-        $task->date = Input::get('date');
+
+        $task->date = Input::get('datetime');
+
+        if($task->notify_date < $task->date){
+            $task->notify_date = $task->date;
+        }
+
+        $periodical = Input::get('periodical');
+        $task->periodical = ($periodical === 'on');
+
+        if($periodical){
+            $task->quant = Input::get('quant');
+            $task->minuts = Input::get('minuts');
+        }
 
         $task->save();
 

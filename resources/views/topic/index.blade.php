@@ -1,9 +1,6 @@
 @extends('layouts.app')
 
-@section('javascript')
-    <script type="text/javascript" src={{ URL::asset('js/vue.js') }}></script>
-    <script type="text/javascript" src={{ URL::asset('js/axios.min.js') }}></script>
-@endsection
+
 
 @section('css')
     <link rel="stylesheet" type="text/css" href={{ URL::asset('css/bootstrap.min.css') }}>
@@ -20,8 +17,7 @@
                             Категории
                         </h4>
                         <a href="/topics/create">
-                            <button class="btn btn-success pull-right">
-                                + Добавить
+                            <button class="btn btn-success pull-right glyphicon glyphicon-plus">
                             </button>
                         </a>
                         <div class="clearfix">
@@ -32,14 +28,23 @@
                             <tbody>
                                 @foreach($topics as $key => $value)
                                     <tr>
-                                        <td >{{ $value->name }}</td>
-                                        <td >
-                                            {{ Form::open(array('url' => 'topics/' . $value->id, 'class' => 'pull-right')) }}
-                                                {{ Form::hidden('_method', 'DELETE') }}
-                                                {{ Form::submit('Удалить', array('class' => 'btn btn-warning')) }}
-                                            {{ Form::close() }}
+                                        <td>{{ $value->name }}</td>
+                                        <td>
+                                            <div class="row">
 
-                                            <a class="btn btn-small btn-info" href="{{ URL::to('topics/' . $value->id . '/edit') }}">Редактировать</a>
+                                                <form action="{{URL::to('topics/' . $value->id . '/edit')}}" method="get" class="col-md-4 col-md-offset-1">
+                                                    {{ csrf_field() }}
+                                                    <button type="submit" class="btn btn-small btn-info glyphicon glyphicon-edit" ></button>
+                                                </form>
+
+                                                {{--<a class="btn btn-small btn-info col-md-4 col-md-offset-1  glyphicon glyphicon-edit" href="{{ URL::to('topics/' . $value->id . '/edit') }}"></a>--}}
+
+                                                {{ Form::open(array('url' => 'topics/' . $value->id, 'class' => 'pull-right col-md-4 col-md-offset-1')) }}
+                                                    {{ Form::hidden('_method', 'DELETE') }}
+                                                    <button type="submit" class="btn btn-danger glyphicon glyphicon-remove" ></button>
+                                                {{ Form::close() }}
+
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -52,10 +57,11 @@
     </div>
 @endsection
 
-
+@section('javascript')
+    <script type="text/javascript" src={{ URL::asset('js/vue.js') }}></script>
+    <script type="text/javascript" src={{ URL::asset('js/axios.min.js') }}></script>
+@endsection
 
 @section('myscript')
     <script type="text/javascript" src={{ URL::asset('js/scripts.js') }}></script>
-
-
 @endsection

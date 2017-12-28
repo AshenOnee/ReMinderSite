@@ -19,8 +19,8 @@ class CreateTasksTable extends Migration
             $table->integer('topic_id');
             $table->string('title');
             $table->string('description')->nullable();
-            $table->dateTime('date');
-            $table->dateTime('notify_date');
+            $table->string('date', 13);
+            $table->string('notify_date', 13);
             $table->boolean('periodical');
             $table->integer('quant')->nullable();
             $table->integer('minuts')->nullable();

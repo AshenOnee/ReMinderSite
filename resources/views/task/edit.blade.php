@@ -16,7 +16,7 @@
                     <div class="panel-body">
                         {!! Html::ul($errors->all()) !!}
 
-                        {!! Form::model($task, array('route' => array('tasks.update', $task->id), 'method' => 'PUT')) !!}
+                        {!! Form::model($task, array('route' => array('tasks.update', $task->id), 'method' => 'PUT', 'id' => 'form')) !!}
 
                         <div class="form-group">
                             {{ Form::label('topic', 'Категория') }}
@@ -66,8 +66,10 @@
                                 {{Form::select('minuts', array('1' => 'Минуты', '60' => 'Часа', '1440' => 'Дня', '10080' => 'Недели'), $task->minuts, array('class' => 'form-control'))}}
                             </div>
                         </div>
+                        <input name="datetime" id="datetime" hidden>
 
-                        {!! Form::submit('Добавить', array('class' => 'btn btn-primary')) !!}
+                        {{--{!! Form::submit('Добавить', array('class' => 'btn btn-primary')) !!}--}}
+                        <span id="span" class="btn btn-primary">Сохранить</span>
 
                         {!! Form::close() !!}
 
@@ -79,7 +81,7 @@
 @endsection
 
 @section('javascript')
-    <script type="text/javascript" src={{ URL::asset('js/vue.js') }}></script>
+    {{--<script type="text/javascript" src={{ URL::asset('js/vue.js') }}></script>--}}
     <script type="text/javascript" src={{ URL::asset('js/axios.min.js') }}></script>
     <script type="text/javascript" src={{ URL::asset('js/jquery.min.js') }}></script>
     {{--<script type="text/javascript" src={{ URL::asset('js/moment.min.js') }}></script>--}}
@@ -89,18 +91,16 @@
     <script type="text/javascript" src={{ URL::asset('js/bootstrap-datetimepicker.min.js') }}></script>
     <script type="text/javascript" src={{ URL::asset('js/ru.js') }}></script>
 
-    <script type="text/javascript">
-        var moment = moment();
-        moment.lang = 'ru';
-        $(function () {
-            $('#datetimepicker2').datetimepicker({
-                locale : 'ru',
-                format: 'YYYY-MM-DD HH:mm'
-            });
-        });
-    </script>
 @endsection
 
 @section('myscript')
+    <script type="text/javascript">
+        window.task = <?=json_encode($task);?>;
+    </script>
+    <script type="text/javascript" src={{ URL::asset('js/task/numericupdown.js') }}></script>
     <script type="text/javascript" src={{ URL::asset('js/scripts.js') }}></script>
+    <script type="text/javascript" src={{ URL::asset('js/task/script.js') }}></script>
+    <script type="text/javascript" src={{ URL::asset('js/task/edit/edit.js') }}></script>
+
+
 @endsection

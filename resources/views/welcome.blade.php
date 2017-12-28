@@ -6,16 +6,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>ReMinder</title>
+        <link rel="icon" href="{{ asset('images/ReMinder.ico') }}"/>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Pacifico&amp;subset=cyrillic" rel="stylesheet">
 
         <!-- Styles -->
         <style>
             html, body {
                 background-color: #fff;
                 color: #636b6f;
-                font-family: 'Raleway', sans-serif;
+                font-family: 'Pacifico', sans-serif;
                 font-weight: 100;
                 height: 100vh;
                 margin: 0;
@@ -73,10 +75,10 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('/home') }}">Главная</a>
                     @else
-                        <a href="{{ url('/login') }}">Login</a>
-                        <a href="{{ url('/register') }}">Register</a>
+                        <a href="{{ url('/login') }}">Вход</a>
+                        <a href="{{ url('/register') }}">Регистрация</a>
                     @endif
                 </div>
             @endif
@@ -88,8 +90,8 @@
 
                 <div class="links">
                     {{--<a href="https://laravel.com/docs">Documentation</a>--}}
-                    <a href="https://github.com/AshenOnee/ReMinderSite">GitHub Site</a>
-                    <a href="https://github.com/latalyananders/ReMinder">GitHub Extension</a>
+                    <a href="https://github.com/AshenOnee/ReMinderSite">GitHub Сайт</a>
+                    <a href="https://github.com/latalyananders/ReMinder">GitHub Расширение</a>
 
                     {{--<a href="https://laracasts.com">Laracasts</a>--}}
                     {{--<a href="https://laravel-news.com">News</a>--}}

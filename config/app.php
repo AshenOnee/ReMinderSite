@@ -51,7 +51,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://reminder.ddns.net'),
 
     /*
     |--------------------------------------------------------------------------
@@ -165,6 +165,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Barryvdh\Cors\ServiceProvider::class,
+        Laravel\Passport\PassportServiceProvider::class,
         /*
          * Package Service Providers...
          */
