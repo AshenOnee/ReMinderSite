@@ -24,7 +24,7 @@ class TaskController extends Controller
     {
         $user = Auth::user();
 //        $tasks = Task::all()->where('user_id', $user->id);
-        $tasks = Task::with(['topic'])->where('user_id', $user->id)->orderBy('date')->get();
+        $tasks = Task::with(['topic'])->where('user_id', $user->id)->orderBy('notify_date')->get();
         return View::make('task.index')
             ->with('tasks', $tasks);
     }
@@ -136,10 +136,10 @@ class TaskController extends Controller
         $task->topic_id = Input::get('topic');
 
         $task->date = Input::get('datetime');
-
-        if($task->notify_date < $task->date){
-            $task->notify_date = $task->date;
-        }
+        $task->notify_date = $task->date;
+//
+//        if($task->notify_date < $task->date){
+//        }
 
         $periodical = Input::get('periodical');
         $task->periodical = ($periodical === 'on');

@@ -17,10 +17,14 @@
             html, body {
                 background-color: #fff;
                 color: #636b6f;
-                font-family: 'Pacifico', sans-serif;
                 font-weight: 100;
+                font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
                 height: 100vh;
                 margin: 0;
+            }
+
+            .logo{
+                font-family: 'Pacifico', sans-serif;
             }
 
             .full-height {
@@ -84,7 +88,7 @@
             @endif
 
             <div class="content">
-                <div class="title m-b-md">
+                <div class="title m-b-md logo">
                     <span class="re">Re</span>Minder
                 </div>
 

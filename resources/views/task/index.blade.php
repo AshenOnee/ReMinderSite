@@ -28,32 +28,12 @@
                     </div>
                     <table class="table table-striped table-bordered">
                         <tbody>
-                        {{--@foreach($tasks as $key => $value)--}}
-                            {{--<tr>--}}
-                                {{--<td>{{ $value->title }}</td>--}}
-                                {{--<td>{{ $value->topic->name }}</td>--}}
-                                {{--<td>--}}
-                                    {{--{{ $value->date }}--}}
-                                    {{--{{ date('d-m-Y H:i', $value->date/1000) }}--}}
-                                {{--</td>--}}
-
-                                {{--<td>--}}
-                                    {{--{{ Form::open(array('url' => 'tasks/' . $value->id, 'class' => 'pull-right')) }}--}}
-                                    {{--{{ Form::hidden('_method', 'DELETE') }}--}}
-                                    {{--{{ Form::submit('Удалить', array('class' => 'btn btn-warning')) }}--}}
-                                    {{--{{ Form::close() }}--}}
-
-                                    {{--<a class="btn btn-small btn-info" href="{{ URL::to('tasks/' . $value->id . '/edit') }}">Редактировать</a>--}}
-                                {{--</td>--}}
-                            {{--</tr>--}}
-                        {{--@endforeach--}}
-
 
                             <tr v-for="value in tasks">
                                 <td>@{{ value.title }}</td>
                                 <td>@{{ value.topic.name }}</td>
                                 <td>
-                                    @{{ format(value.date) }}
+                                    @{{ format(value.notify_date) }}
                                 </td>
 
                                 <td>

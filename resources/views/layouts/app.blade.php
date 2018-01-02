@@ -19,10 +19,14 @@
         html, body {
             background-color: #fff;
             color: #636b6f;
-            font-family: 'Pacifico', sans-serif;
             font-weight: 100;
+            font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
             height: 100vh;
             margin: 0;
+        }
+        .logo{
+            font-family: 'Pacifico', sans-serif;
+
         }
     </style>
 
@@ -44,7 +48,9 @@
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
                         {{--{{ config('app.name', 'Laravel') }}--}}
-                        <span style="color: red">Re</span>Minder
+                        <div class="logo">
+                            <span style="color: red">Re</span>Minder
+                        </div>
                     </a>
                 </div>
 
@@ -78,6 +84,7 @@
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
+                                            <span class="glyphicon glyphicon-log-out"></span>
                                             Выход
                                         </a>
 
